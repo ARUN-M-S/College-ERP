@@ -1,5 +1,5 @@
-const postLogin = require("./authLogin");
-const postRegister = require("./authRegister");
+const postLogin = require("./postLogin");
+const postRegister = require("./postRegister");
 exports.controllers ={
     postLogin,
     postRegister

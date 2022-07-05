@@ -19,7 +19,16 @@ const postRegister = async (req, res) => {
       mail: mail.toLowerCase(),
     });
     // ===================Create JWt token=============
-    const token = "JWT TOKEN";
+    const token = jwt.sign(
+      {
+        userId:user._id,
+        mail
+      },
+      process.env.TOKEN_KEY,
+      {
+        expiresIn:'24h'
+      }
+    )
     
     res.status(200).json({
       userDetails: {

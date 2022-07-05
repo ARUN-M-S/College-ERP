@@ -9,14 +9,23 @@ const postLogin = async (req, res) => {
 
     if (user && (await bcrypt.compare(password, user.password))) {
       //Send a new Token
-      const token="JWT TOKEN";
-      return res.status(200).json({
-        userDetails:{
-          mail:user.mail,
-          username:user.username,
-          token:token
+      const token = jwt.sign(
+        {
+          userId: user._id,
+          mail,
+        },
+        process.env.TOKEN_KEY,
+        {
+          expiresIn: "24h",
         }
-      })
+      );
+      return res.status(200).json({
+        userDetails: {
+          mail: user.mail,
+          username: user.username,
+          token: token,
+        },
+      });
     } else if (!user) {
       return res.status(400).send("Invalid Mail. Please Enter correct mail");
     }
