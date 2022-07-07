@@ -1,23 +1,37 @@
-import React from 'react'
-import "./login.css"
-function loginPage() {
-  return (
-    <div>
-      
-<div class="container">
-  <div class="brand-logo"></div>
-  <div class="brand-title">TWITTER</div>
-  <div class="inputs">
-    <label>EMAIL</label>
-    <input type="email" placeholder="example@test.com" />
-    <label>PASSWORD</label>
-    <input type="password" placeholder="Min 6 charaters long" />
-    <button type="submit">LOGIN</button>
-  </div>
-  <a href="https://twitter.com/prathkum">MADE BY PRATHAM</a>
-</div>
-    </div>
-  )
-}
+import React, { useState, useEffect } from "react";
 
-export default loginPage
+import "./login.css";
+import AuthBox from "../../shared/components/AuthBox";
+import LoginPageHeader from "./LoginPageHeader";
+import LoginPageInputs from "./LoginPageInputs";
+import LoginPageFooter from "./LoginPageFooter";
+import { validateLoginForm } from "../../shared/utils/validator";
+
+
+export default function LoginPage() {
+  const [mail, setMail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isFormValid, setIsFormValid] = useState(false);
+  useEffect(() => {
+    setIsFormValid(validateLoginForm({ mail, password }));
+  }, [mail, password, setIsFormValid]);
+
+  const handleLogin = () => {
+    console.log(mail);
+    console.log(password);
+    console.log("Login in");
+  };
+  return (
+    <AuthBox>
+      <LoginPageHeader />
+      <LoginPageInputs
+        mail={mail}
+        password={password}
+        setMail={setMail}
+        setPassword={setPassword}
+      />
+      <LoginPageFooter isFormValid={isFormValid} handleLogin={handleLogin} />
+      
+    </AuthBox>
+  );
+}

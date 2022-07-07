@@ -6,14 +6,14 @@ import {
   Navigate,
 } from "react-router-dom";
 import "./App.css";
-import LoginPage from "./authPages/LoginPage/loginPage";
+import LoginPage from "./authPages/LoginPage/LoginPage";
 import RegisterPage from "./authPages/RegisterPage/RegisterPage";
 import DashBoard from "./Dashboard/DashBoard";
 
 function App() {
   return (
     <div>
-      <h1>Hello</h1>
+      
       <Router>
         <Routes>
           <Route exact path="/login" element={<LoginPage />} />
